@@ -5,13 +5,15 @@ import org.openqa.selenium.WebDriver;
 public class ProductsPage extends BasePage {
 private static final String ADD_TO_CART = "//*[text()='%s']//ancestor::div[@class='inventory_item']//child::button[text()='Add to cart']";
 
-    private By goodsC0unter = By.cssSelector("a span");
+    private By goodsCounter = By.cssSelector("a span");
     private By title = By.cssSelector(".title");
+    private By addToCartButton = By.xpath("//*[text()='Add to cart']");
+    private By basketIcon = By.cssSelector(".shopping_cart_link");
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-    public boolean getTitle() {
+    public boolean isPageOpen() {
         return driver.findElement(title).isDisplayed();
     }
 
@@ -24,7 +26,15 @@ private static final String ADD_TO_CART = "//*[text()='%s']//ancestor::div[@clas
         driver.findElement(addToCart).click();
     }
 
+    public void addToCart(final int index) {
+        driver.findElements(addToCartButton).get(index).click();
+    }
+
     public String getGoodsCounter() {
-        return driver.findElement(goodsC0unter).getText();
+        return driver.findElement(goodsCounter).getText();
+    }
+
+    public void switchToCart() {
+        driver.findElement(basketIcon).click();
     }
 }

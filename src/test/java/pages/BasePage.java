@@ -9,6 +9,7 @@ public abstract class BasePage {
     WebDriverWait wait;
     LoginPage loginPage;
     ProductsPage productsPage;
+    CartPage cartPage;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
