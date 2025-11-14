@@ -6,26 +6,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.LoginPage;
+import pages.*;
 import java.time.Duration;
 
 public class BaseTest {
     private static final Logger log = LoggerFactory.getLogger(BaseTest.class);
-    public WebDriver browser;
+    public WebDriver driver;
     LoginPage loginPage;
+    ProductsPage productsPage;
+    CartPage cartPage;
 
     @BeforeMethod
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
-        browser = new ChromeDriver(options);
-        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        loginPage = new LoginPage(browser);
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage = new LoginPage(driver);
+        productsPage = new ProductsPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @AfterMethod
     public void close() {
-        browser.quit();
-
+        driver.quit();
     }
 }
