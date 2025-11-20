@@ -2,6 +2,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import user.User;
+
 public class LoginPage extends BasePage {
 
     private By loginInput = By.id("user-name");
@@ -17,9 +19,9 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL);
     }
 
-    public void authorization(String userName, String password) {
-        login(userName);
-        password(password);
+    public void authorization(User user) {
+        login(user.getEmail());
+        password(user.getPassword());
         loginButton();
     }
 
@@ -37,6 +39,7 @@ public class LoginPage extends BasePage {
 
     public String checkErrorMsg () {
         wait.until(ExpectedConditions.visibilityOfElementLocated(errorMsg));
+
         return driver.findElement(errorMsg).getText();
         }
     }
