@@ -1,9 +1,9 @@
 package tests;
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import user.User;
 import user.UserFactory;
-
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -21,7 +21,12 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test
+    @Epic("Модуль авторизации интернет-магазина")
+    @Feature("Проверка ввода корретного логина и пароля")
+    @Severity(SeverityLevel.BLOCKER)
+    @Owner("Shnitkovskaya Anna shnitkovakayaanna@gmail.com")
+    @TmsLink("Sauce_d")
+    @Test()
     public void authCorrect() {
         System.out.println("CorrectLogin Tests are running in thread: " + Thread.currentThread().getId());
         loginPage.open();
@@ -30,6 +35,10 @@ public class LoginTest extends BaseTest {
         assertEquals("Products", productsPage.getTitleText());
     }
 
+    @Epic("Модуль авторизации интернет-магазина")
+    @Feature("Проверка ввода некорретного логина и пароля")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Shnitkovskaya Anna shnitkovakayaanna@gmail.com")
     @Test(dataProvider = "loginData")
     public void authIncorrect(User user, String errorMsg) {
         System.out.println("IncorrectLogin Tests are running in thread: " + Thread.currentThread().getId());
